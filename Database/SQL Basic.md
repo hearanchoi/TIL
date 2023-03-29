@@ -72,7 +72,12 @@ ROUND(숫자, 소수점 자릿수 ) : 반올림 ROUND(25.3434, 2) >>25.34
  MOD(분자,분모) : 분자를 분모로 나눈 나머지 반환 MOD(3,2) >> 1<br>
  SIGN(숫자) : 숫자가 양수면1, 0이면 0, 음수면 -1 반환<br>
  ABS(숫자) : 절댓값<br>
- <br>
+ <br>ㅇ
  <strong>날짜형 함수</strong><br>
  SYSDATE : 현재 날짜 &시각 출력 <br>
- EXTRACT()
+ EXTRACT(정보 FROM 날짜) :<br> 날짜형 데이터에서 원하는 값을 추출함 EXTRACT( YEAR FROM date '2022-01-31') >>> 2022 <br>EXTRACT(YEAR FROM SYSDATE) 와 TO_NUMBER(TO_CHAR(sysdate, 'YYYY')) 는 동일한 결과
+<br><br>
+ <strong>명시적/ 암시적 변환</strong><br>
+ TO_NUMBER(문자열) : 문자열을 숫자로 변환<br>
+ TO_CHAR(숫자 or 날짜, 포맷) : <br>숫자 혹은 날짜형 데이터를 포맷에 맞게 문자로 바꿈 TO_CHAR(date '2022-02-11','day') >>> '금요일'<br>
+ TO_DATE(문자열, 포맷) TO_DATE('20220113120', 'YYYYMMDDHH24') >>> 2022/01/31 20:00:00
