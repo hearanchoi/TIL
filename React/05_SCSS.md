@@ -50,3 +50,166 @@ CSS의 확장자를 scss(sass)로 변경
 
 적용할 컴포넌트의 Import를 scss(sass)로 변경
 import "./App.scss"
+
+
+SASS vs SCSS
+// SASS
+.wrapper
+  width: 100px
+  height: 200px
+  .content
+    color: white
+    float: left
+    
+    
+// SCSS
+.wrapper{
+    width: 100px;
+    height: 200px;
+    .content{
+        color: white;
+        float: left;
+    }
+}
+이 둘은 중괄호, 세미콜론 등과 같은 차이가 있는데 사용하기 익숙한 SCSS로 리액트를 작성해보록 한다.
+
+Nestig
+부모요소를 반복적으로 기술하지 않고 부모 {}안에 자식요소를 위치시켜 사용한다.
+
+& 부모선택자
+&는 부모선택자라는 뜻이다. &>div 처럼 부모선택자 안의 요소를 쉽게 선택할 수 있게 해준다.
+
+&:hover
+부모(&)에 :속성을 부여해줄 때 사용한다.
+
+li{
+	float:left;
+	display:inline-block;
+	text-align:center;
+	color:white;
+	width:50%;
+	line-height:50px;
+	&:hover{
+		font-weight:bold;
+		background-color:$fontcolor*2;
+		color:$fontcolor;
+		height:49px;
+    }
+$변수
+$변수를 이용하여 공통된 속성을 재활용 할 수 있다.
+
+$font-color: red;
+.content{
+    color: $font-color;
+    float:left;
+}
+@mixin
+@mixin을 사용하면 공통된 속성의 묶음을 재활용 할 수 있다.
+다음과 같이 미디어 쿼리를 사용할 때 매우 유용하게 쓰일 수 있다.
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+​
+@mixin mobile {
+  @media screen and (min-width: $sm) {
+    @content;
+  }
+}
+​
+@mixin tablet {
+  @media screen and (min-width: $md) {
+    @content;
+  }
+}
+​
+@mixin desktop {
+  @media screen and (min-width: $lg) {
+    @content;
+  }
+}
+​
+@mixin large-desktop {
+  @media screen and (min-width: $xl) {
+    @content;
+  }
+}
+@extend
+특정 선택자를 상속할 때 사용한다.
+
+.box{
+	padding:20px;
+	border:1px solid #333;
+}
+ 
+.news-box{
+	@extend .box;
+	background-color:#eee;
+}
+ 
+.list-box{
+	@extend .box;
+	background-color:#000;	
+}
+typography로 정해놓은 속성 extend하기
+아래와 같이 h1,h2,h3등등과 같은 태그들의 속성들을 typography 파일로 전역적으로 사용하기 위해 설정해두고, 다른 파일에 extend하여, 다른 속성들을 적용시킨다.
+
+//typography.css
+.h1 {
+  font-size: 2.0em;
+}
+​
+.h2 {
+​
+}
+​
+.h3 {
+  margin-top: 2.1em;
+  margin-bottom: 1.3em;
+​
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+​
+.h4 {
+  margin-top: 1.3em;
+  margin-bottom: 0.9em;
+​
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+//index.css
+ h5 {
+      @extend .h5;
+      font-weight: bold;
+      padding-top: 1.25rem;
+      border-top: 1px solid $color-lightgray;
+    }
+@import
+하나의 파일로 CSS관리하는 것에는 어려움이 있기 때문에 @import기능을 활용하여 코드의 재활용, 유지보수에 도움을 준다.
+@import 'reset.css 처럼 확장자를 붙여도 되고
+@import 'reset' 처럼 생략도 가능하다.
+
+@if
+조건 분기가 가능하다.
+
+$num : two;
+div{
+	@if $num == one{
+    color: blue;
+    }else if $num == two{
+    color: red;
+    }@else{
+    color: black;
+    }
+}
+@for
+반복문 사용이 가능하다
+
+@for $i form 1 thrugh 3{
+	.item-#{$i}{
+    width: 2em * $i;
+    }
+}
