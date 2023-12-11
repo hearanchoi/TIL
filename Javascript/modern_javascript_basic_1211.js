@@ -104,3 +104,81 @@ const car3 = {
 };
 console.log(car3.wheels); //4
 console.log(car3['color']); // red
+// 여러 단어로 이뤄진 속성의 경우 점 표기법을 사용할 수 없다.
+const car4 = {
+    wheels: 4,
+    color: 'blue',
+    "goes fast": true
+};
+// console.log(car4.goes fast);//SyntaxError
+console.log(car4['goes fast']); //true
+// 여러 단어로 된 속성을 사용하려면 해당 이름을 따옴표로 묶어야 하기 때문에 대괄호 표기법으로만 접근 가능
+// 키를 사용해서 객체의 속성에 접근할 때도 대괄호 표기법 사용
+// ex) 사용자가 자동차를 찾을때, 애플리케이션에는 사용자에게 좋아하는 자동차를 알려달라고 한다.
+// 사용자가 선택한 브랜드는 적절한 모델을 출력하기 위한 키가 된다.
+const cars = {
+    ferrari: 'california',
+    porsche: '911',
+    bugatti: 'veyron',
+};
+// 사용자 입력
+const key = 'ferrari';
+console.log(cars.key); //undefined
+console.log(cars['key']) //undefined
+console.log(cars[key]); // california
+// 이와 같이 변수에 저장된 키를 통해 객체의 속성에 접근하려면 대괄호 표기법을 사용해야 한다.
+// key는 문자열이 아닌 변수 이름이므로 따옴표 표기를 해서는 안된다.
+
+// 객체의 복사
+// 원시 자료형과는 달리 객체를 복사할 때는 참조방식이 쓰인다. 
+let car6 = {
+    color: 'pink'
+};
+let secondCar = car6;
+
+car6.wheels = 4;
+console.log(car6); //{ color: 'pink', wheels: 4 }
+console.log(secondCar); // { color: 'pink', wheels: 4 }
+console.log(car6 == secondCar); // true
+console.log(car6 === secondCar); // true
+// 항등 연산자(== ,equality)를 사용하던 완전 항등 연산자(===. strict equality)를 사용하든 ture이다.
+// 즉 두 객체가 동일하다는 의미이다. 반면 빈 객체끼리 비교해보자
+const emptyObj1 = {};
+const emptyObj2 = {};
+
+console.log(emptyObj1 == emptyObj2); // false
+console.log(emptyObj1 === emptyObj2); //false
+
+// 동일한 속성을 가진 객체끼리 비교 
+const obj1 = {a: 1};
+const obj2 = {a: 1};
+
+console.log(obj1 == obj2); //false
+console.log(obj1 === obj2); //false
+// 동일한 객체를 비교할때만 true를 반환받을 수 있음을 볼 수 있다.
+// 자바스크립트에서 객체의 복사본을 만드는 빠른 방법 중 하나는 Object.assign()을 사용하는 방법이다.
+const car7 = {
+    color: 'yellow'
+};
+const thirdCar = Object.assign({}, car7);
+car7.wheels = 4;
+console.log(car7); // { color: 'yellow', wheels: 4 }
+console.log(thirdCar); // { color: 'yellow' }
+// 이렇게 하면 car7를 업데이트 해도 thirdCar에는 영향을 주지 않는다. Object.assign()의 첫 번째 인수(arguments)는 복사본에 해당하는
+// 객체이고, 두 번째 인수는 원본에 해당하는 객체이다.  이 예에서는 빈 객체를 복사본으로 넣고 car7를 원본으로 넣었다.
+
+// 배열
+// 배열이란 순서대로 값을 저장하는 객체이다. 항목으로 이뤄진 목록만 저장할때는 객체 대신 배열을 사용하면 된다.
+const fruitBasket = [ 'apple', 'banana', 'orange'];
+// 이렇게 만들어진 배열의 각 항목의 값에 접근할 때는 인덱스(index)를 사용하면 된다. 배열의 인덱스는 0부터 시작한다.
+console.log(fruitBasket[0]); //apple
+console.log(fruitBasket[1]); //banana
+// 배열에 대해 호출 할 수 있는 많은 메서드가 있다.
+// 배열의 길이 확인하기
+console.log(fruitBasket.length); //3
+// 배열의 끝에 새 값을 추가하기
+fruitBasket.push('pear');
+console.log(fruitBasket); // [ 'apple', 'banana', 'orange', 'pear' ]
+// 배열의 시작에 새 값을 추가하기
+fruitBasket.unshift('melon');
+console.log(fruitBasket); // [ 'melon', 'apple', 'banana', 'orange', 'pear' ]
